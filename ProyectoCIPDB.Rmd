@@ -42,8 +42,7 @@ knitr::opts_chunk$set(
   echo = TRUE,
   fig.align = "center",
   out.width = "100%",
-  fig.cap = "Figura generada a partir de código"
-  )
+  fig.cap = "Figura generada a partir de código")
 
 options(knitr.kable.NA = "")
 
@@ -61,8 +60,6 @@ En este estudio, @klemens2021camera aborda estas limitaciones mediante el diseñ
 En este proyecto se utiliza el dataset asociado al artículo de @klemens2021camera con el objetivo de explorar patrones de actividad y comportamiento detectados por este tipo de sistema, evaluando la calidad y utilidad de los datos para estudios ecológicos.
 
 ## Mapa de las cámaras
-
-#Representacion del mapa
 
 ```{r}
 head(Location)
@@ -118,8 +115,7 @@ datos_sin_NA$trailcam_Flying_Squirrel_events <- as.numeric(
 tabla_base <- function(tabla, base = "Tabla generada a partir de código") {
   tabla %>% 
     knitr::kable(caption = base) %>% 
-    kable_styling(position = "center", full_width = FALSE)
-}
+    kable_styling(position = "center", full_width = FALSE)}
   
 # Ahora represento la tablas de los datos procesados con los ajustes preestablecidos en la base
 tabla_base(head(datos_procesados,10))
@@ -182,8 +178,7 @@ datos_procesados %>%
   labs(
     x = "Ambiente",
     y = "Capturas totales",
-    title = "Comparación entre las capturas totales de cada ambiente"
-  )
+    title = "Comparación entre las capturas totales de cada ambiente")
 
 #Gráfico de barras
 datos_procesados %>% 
@@ -193,8 +188,7 @@ datos_procesados %>%
   labs(
     x = "Ambiente",
     y = "Capturas totales",
-    title = "Comparación entre las capturas totales de cada ambiente"
-  )
+    title = "Comparación entre las capturas totales de cada ambiente")
 
 #Análisis de ardillas
 
@@ -221,8 +215,7 @@ datos_procesados %>%
   labs(
     x = "Ambiente",
     y = "Capturas totales de ardillas voladoras",
-    title = "Comparación entre las capturas de ardillas voladoras en cada ambiente"
-  )
+    title = "Comparación entre las capturas de ardillas voladoras en cada ambiente")
 
 #Gráfico de barras
 datos_procesados %>% 
@@ -232,8 +225,7 @@ datos_procesados %>%
   labs(
     x = "Ambiente",
     y = "Capturas totales de ardillas voladoras",
-    title = "Comparación entre las capturas de ardillas voladoras en cada ambiente"
-  )
+    title = "Comparación entre las capturas de ardillas voladoras en cada ambiente")
 
 #Análisis de otros mamíferos
 
@@ -260,8 +252,7 @@ datos_procesados %>%
   labs(
     x = "Ambiente",
     y = "Capturas totales de otros mamíferos",
-    title = "Comparación entre las capturas de otros mamíferos en cada ambiente"
-  )
+    title = "Comparación entre las capturas de otros mamíferos en cada ambiente")
 
 #Gráfico de barras
 datos_procesados %>% 
@@ -271,22 +262,19 @@ datos_procesados %>%
   labs(
     x = "Ambiente",
     y = "Capturas totales de otros mamíferos",
-    title = "Comparación entre las capturas de otros mamíferos en cada ambiente"
-  )
+    title = "Comparación entre las capturas de otros mamíferos en cada ambiente")
 
 ## Ahora los gráficos relacionados con la segunda hipótesis
 # Gráfico cámaras y ardillas
 ggplot(datos_sin_NA, aes(
   y = trailcam_Flying_Squirrel_events,
-  x = Trailcam_model
-)) +
+  x = Trailcam_model)) +
   geom_boxplot(outlier.shape = NA, fill = "white", color = "black") +
   geom_jitter(height = 0.2, size = 2, alpha = 0.7) +
   labs(
     x = "Modelo de cámara",
     y = "Eventos de ardillas voladoras (trailcam)",
-    title = "Eficiencia de detección de ardillas voladoras por modelo de cámara"
-  ) +
+    title = "Eficiencia de detección de ardillas voladoras por modelo de cámara") +
   theme_minimal()
 
 # Datos estadísticos de la variable de las ardillas voladoras
@@ -298,31 +286,27 @@ resumen_flying_squirrel_events <- datos_sin_NA %>%
     mediana = median(trailcam_Flying_Squirrel_events, na.rm = TRUE),
     sd = sd(trailcam_Flying_Squirrel_events, na.rm = TRUE),
     min = min(trailcam_Flying_Squirrel_events, na.rm = TRUE),
-    max = max(trailcam_Flying_Squirrel_events, na.rm = TRUE)
-  )
+    max = max(trailcam_Flying_Squirrel_events, na.rm = TRUE))
 
 resumen_flying_squirrel_events
 
 # Análisis cámaras y ardillas
 kruskal_test_ardillas <- kruskal.test(
   trailcam_Flying_Squirrel_events ~ Trailcam_model,
-  data = datos_sin_NA
-)
+  data = datos_sin_NA)
 
 kruskal_test_ardillas
 
 # Gráfica otros mamíferos y cámaras
 ggplot(datos_sin_NA, aes(
   y = trailcam_Other_Mammal_events,
-  x = Trailcam_model
-)) +
+  x = Trailcam_model)) +
   geom_boxplot(outlier.shape = NA, fill = "white", color = "black") +
   geom_jitter(height = 0.2, size = 2, alpha = 0.7) +
   labs(
     x = "Modelo de cámara",
     y = "Eventos de otros mamíferos (trailcam)",
-    title = "Eficiencia de detección de otros mamíferos por modelo de cámara"
-  ) +
+    title = "Eficiencia de detección de otros mamíferos por modelo de cámara") +
   theme_minimal()
 
 #Análisis
@@ -334,15 +318,13 @@ resumen_other_mammal_events <- datos_sin_NA %>%
     mediana = median(trailcam_Other_Mammal_events, na.rm = TRUE),
     sd = sd(trailcam_Other_Mammal_events, na.rm = TRUE),
     min = min(trailcam_Other_Mammal_events, na.rm = TRUE),
-    max = max(trailcam_Other_Mammal_events, na.rm = TRUE)
-  )
+    max = max(trailcam_Other_Mammal_events, na.rm = TRUE))
 
 resumen_other_mammal_events
 
 kruskal_test_mamal <- kruskal.test(
   trailcam_Other_Mammal_events ~ Trailcam_model,
-  data = datos_sin_NA
-)
+  data = datos_sin_NA)
 
 kruskal_test_mamal
 
@@ -350,15 +332,13 @@ kruskal_test_mamal
 
 ggplot(datos_sin_NA, aes(
   y = trailcam_Other_events,
-  x = Trailcam_model
-)) +
+  x = Trailcam_model)) +
   geom_boxplot(outlier.shape = NA, fill = "white", color = "black") +
   geom_jitter(height = 0.2, size = 2, alpha = 0.7) +
   labs(
     x = "Modelo de cámara",
     y = "Otros eventos(trailcam)",
-    title = "Eficiencia de detección de otros eventos"
-  ) +
+    title = "Eficiencia de detección de otros eventos") +
   theme_minimal()
 
 # Análisis
@@ -370,15 +350,13 @@ resumen_other_events <- datos_sin_NA %>%
     mediana = median(trailcam_Other_events, na.rm = TRUE),
     sd = sd(trailcam_Other_events, na.rm = TRUE),
     min = min(trailcam_Other_events, na.rm = TRUE),
-    max = max(trailcam_Other_events, na.rm = TRUE)
-  )
+    max = max(trailcam_Other_events, na.rm = TRUE))
 
 resumen_other_events
 
 kruskal_test_other_events <- kruskal.test(
   trailcam_Other_events ~ Trailcam_model,
-  data = datos_sin_NA
-)
+  data = datos_sin_NA)
 
 kruskal_test_other_events
 
@@ -393,3 +371,4 @@ Además, los análisis nos sugieren que, a pesar de haber menos ardillas en el m
 Relacionado con la segunda hipótesis, podemos decir que no hay relacion entre la cámara y el número de ardillas voladoras avistadas, tampoco la hay con la de otros mamíferos observados, por lo que podemos aceptar la hipótesis nula y rechazar la alternativo. A primera vista, no parece que haya relación entre el modelo de cámara usado y el número de capturas.
 
 # Bibliografía
+
